@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">StackOverFlowSearch</string>
+    <string name="search_hint">Search StackOverflow</string>
+    <string name="title_label">Title:</string>
+    <string name="author_label">Author:</string>
+    <string name="created_at_label">Created At:</string>
+    <string name="link_label">Link:</string>
 </resources>
