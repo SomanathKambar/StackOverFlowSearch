@@ -17,6 +17,7 @@ android {
         versionName = "1.0"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+//        testInstrumentationRunner = "androidx.test.ext.junit.runners.AndroidJUnit4"
     }
 
     buildTypes {
@@ -39,7 +40,26 @@ android {
         viewBinding = true
         dataBinding = true
     }
+
+    packaging {
+        resources.excludes.addAll(
+            listOf(
+                "META-INF/LICENSE.md",
+                "META-INF/LICENSE-notice.md",
+        )
+        )
+        jniLibs {
+            useLegacyPackaging = true
+        }
+    }
+
+    testOptions {
+        unitTests.all {
+//            useJUnitPlatform()
+        }
+    }
 }
+
 
 dependencies {
 
@@ -47,9 +67,6 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
     implementation(libs.androidx.activity)
-    testImplementation(libs.junit)
-    androidTestImplementation(libs.androidx.junit)
-    androidTestImplementation(libs.androidx.espresso.core)
 
 
     implementation (libs.androidx.constraintlayout)
@@ -58,7 +75,7 @@ dependencies {
 
     implementation (libs.material.v130)
 
-//    implementation ("org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3")
+//    implementation ")org.jetbrains.kotlinx:kotlinx-coroutines-android:1.4.3")
 
     //life Cycle
     implementation (libs.androidx.lifecycle.viewmodel.ktx)
@@ -66,6 +83,7 @@ dependencies {
 
     //Hilt for Dependency injection
     implementation(libs.hilt.android)
+    implementation(libs.androidx.runner)
     kapt(libs.hilt.android.compiler)
 
     //Retrofit for Api integration
@@ -84,6 +102,14 @@ dependencies {
     implementation (libs.rxbinding.core)
     implementation (libs.rxbinding.appcompat)
 
+    testImplementation (libs.junit)
+    testImplementation ("org.mockito:mockito-core:5.14.2")
+    testImplementation ("org.mockito.kotlin:mockito-kotlin:4.1.0")
+    testImplementation ("io.reactivex.rxjava3:rxjava:3.1.10")
+    testImplementation (libs.androidx.core.testing)
+
+    androidTestImplementation ("androidx.test.ext:junit:1.1.5")
+    androidTestImplementation ("androidx.test.espresso:espresso-core:3.5.1")
 
 
 }

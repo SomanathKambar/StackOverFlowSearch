@@ -5,8 +5,10 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.somanath.stackoverflowsearch.data.ApiResponse
 import com.somanath.stackoverflowsearch.data.model.Item
+import com.somanath.stackoverflowsearch.data.model.StackOverFlowResponse
 import com.somanath.stackoverflowsearch.domain.SearchQueryUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
+import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.disposables.CompositeDisposable
 import javax.inject.Inject
 
@@ -27,18 +29,22 @@ class StackOverflowViewModel @Inject constructor(
     private val disposable = CompositeDisposable()
 
     fun searchQueries(query: String) {
-        _loading.value = true
+        _loading.postValue(true)
         disposable.clear()
         useCase.invoke(query)
+            .observeOn(AndroidSchedulers.mainThread())
+            .doOnTerminate { _loading.postValue(false) }
             .subscribe(
                 { apiResponse ->
                     when (apiResponse) {
                         is ApiResponse.Loading -> {
                             _loading.postValue( true)
                         }
-                        is ApiResponse.Success -> {
+                        is ApiResponse.Success<*> -> {
+                            if(apiResponse.data is StackOverFlowResponse) {
                             _loading.postValue( false)
                             _questions.postValue(apiResponse.data.items)
+                            }
                             disposable.clear()
                         }
                         is ApiResponse.Failure -> {
@@ -52,7 +58,10 @@ class StackOverflowViewModel @Inject constructor(
                     _loading.postValue(false)
                     _error.postValue(throwable.message)
                 }
-            ).let { disposable.add(it) }
+            ).let {
+                disposable.add(it)
+
+            }
 
     }
 

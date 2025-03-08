@@ -1,6 +1,7 @@
 [versions]
 agp = "8.5.2"
 constraintlayoutVersion = "2.2.1"
+coreTesting = "2.2.0"
 hiltAndroidCompiler = "2.51.1"
 kotlin = "1.9.0"
 coreKtx = "1.15.0"
@@ -18,11 +19,15 @@ activity = "1.10.1"
 rxandroid = "3.0.0"
 rxbindingCore = "4.0.0"
 rxjava = "3.1.10"
+junitJunit = "4.12"
+junitKtx = "1.2.1"
+runner = "1.6.2"
 
 [libraries]
 adapter-rxjava3 = { module = "com.squareup.retrofit2:adapter-rxjava3", version.ref = "retrofitVersion" }
 androidx-constraintlayout = { module = "androidx.constraintlayout:constraintlayout", version.ref = "constraintlayoutVersion" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-core-testing = { module = "androidx.arch.core:core-testing", version.ref = "coreTesting" }
 androidx-lifecycle-livedata-ktx = { module = "androidx.lifecycle:lifecycle-livedata-ktx", version.ref = "lifecycleLivedataKtx" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleLivedataKtx" }
 androidx-recyclerview = { module = "androidx.recyclerview:recyclerview", version.ref = "recyclerview" }
@@ -43,6 +48,9 @@ rxbinding = { module = "com.jakewharton.rxbinding4:rxbinding", version.ref = "rx
 rxbinding-appcompat = { module = "com.jakewharton.rxbinding4:rxbinding-appcompat", version.ref = "rxbindingCore" }
 rxbinding-core = { module = "com.jakewharton.rxbinding4:rxbinding-core", version.ref = "rxbindingCore" }
 rxjava = { module = "io.reactivex.rxjava3:rxjava", version.ref = "rxjava" }
+junit-junit = { group = "junit", name = "junit", version.ref = "junitJunit" }
+androidx-junit-ktx = { group = "androidx.test.ext", name = "junit-ktx", version.ref = "junitKtx" }
+androidx-runner = { group = "androidx.test", name = "runner", version.ref = "runner" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
